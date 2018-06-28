@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Link from 'next/link'
 
 // Import
 import './index.less'
@@ -26,6 +27,7 @@ class Home extends Component {
       <div>
         <link rel="stylesheet" href="/_next/static/style.css" />
         
+        <Link href="/about"><a>here</a></Link>
         <h2 onClick={this.handleClick}>{this.state.title}</h2>
       </div>
     )
