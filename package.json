@@ -1,0 +1,8 @@
+{
+  "name": "react-and-next-equal-amazing",
+  "version": "0.0.0",
+  "description": "Um simples projeto para testar o framework NextJS",
+  "repository": "https://github.com/httpiago/sample-react-ssr",
+  "author": "httpiago <httpiago@gmail.com>",
+  "license": "MIT"
+}
