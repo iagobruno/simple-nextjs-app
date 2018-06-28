@@ -3,6 +3,14 @@
   "version": "0.0.0",
   "description": "Um simples projeto para testar o framework NextJS",
   "repository": "https://github.com/httpiago/sample-react-ssr",
-  "author": "httpiago <httpiago@gmail.com>",
-  "license": "MIT"
+  "scripts": {
+    "dev": "next",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "next": "^6.1.0",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
+  }
 }
