@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 
+// Import
+import './index.less'
+
 class Home extends Component {
   constructor(props) {
     super(props);
@@ -21,6 +24,8 @@ class Home extends Component {
   render() { 
     return (
       <div>
+        <link rel="stylesheet" href="/_next/static/style.css" />
+        
         <h2 onClick={this.handleClick}>{this.state.title}</h2>
       </div>
     )
