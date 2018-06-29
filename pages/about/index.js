@@ -1,1 +1,1 @@
-export default () => <h2>Hello World!</h2>
+export default () => <h2>Página sobre Iago Bruno</h2>

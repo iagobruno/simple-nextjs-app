@@ -9,10 +9,17 @@
     "start": "next start"
   },
   "dependencies": {
+    "@zeit/next-css": "^0.2.0",
     "@zeit/next-less": "^0.3.0",
+    "bootstrap": "^4.1.1",
     "less": "^3.0.4",
     "next": "^6.1.0",
+    "next-images": "^0.10.5",
     "react": "^16.4.1",
-    "react-dom": "^16.4.1"
+    "react-dom": "^16.4.1",
+    "reactstrap": "^6.2.0"
+  },
+  "devDependencies": {
+    "babel-plugin-module-resolver": "^3.1.1"
   }
 }
