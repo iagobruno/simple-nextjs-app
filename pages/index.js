@@ -1,38 +1,40 @@
 import React, { Component } from 'react'
 import Link from 'next/link'
-import { Button } from 'reactstrap'
+import Router from 'next/router'
+import { Button, Form, Input } from 'reactstrap'
 
 class Home extends Component {
-  static async getInitialProps() {
-    console.log('oi')
-  }
-
   state = {
-    title: 'Hello world!'
+    githubUsername: 'httpiago'
   }
 
-  handleClick = (event) => {
-    this.setState((prevState) => {
-      return {
-        title: prevState.title + '!'
-      }
-    })
+  showRepositories = (event) => {
+    event.preventDefault()
+
+    // Ir para a página que mostra os repositórios
+    Router.push(`/about?username=${this.state.githubUsername}`)
   }
 
   render() { 
     return (
       <div className="page">        
         <img className="logoHP" src="/static/logo.svg" />
-        <h1 onClick={this.handleClick}>{this.state.title}</h1>
+        <h1 className="title">Hello world!</h1>
         <div className="description">
-          This is an example of an app built
-          with <Link href="https://github.com/facebook/create-react-app"><a>Create React App</a></Link> and{' '}
-          <Link href="https://github.com/necolas/react-native-web"><a>React Native for Web</a></Link>
+          Esse aplicativo lista todos os{' '}
+          <Link href={`https://github.com/${this.state.githubUsername}`}><a>seus repositórios do GitHub</a></Link>{' '}
+          (sem contar com os forks).
         </div>
-        <Link href="/about"><Button color="primary">Fazer login</Button></Link>
+        <Form onSubmit={this.showRepositories}>
+          <Input type="text" className="inputUsername" placeholder={`Username do GitHub (${this.state.githubUsername})`} onChange={(event) => this.setState({ githubUsername: event.target.value})} />
+          <Button color="primary" onClick={this.showRepositories}>Listar repositórios</Button>
+        </Form>
       </div>
     )
   }
 }
- 
+
+// Avisar no console quando o url da página mudar
+Router.onRouteChangeComplete = (url) => console.log(`Url changed: ${url}`);
+
 export default Home
