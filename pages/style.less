@@ -6,6 +6,7 @@
 
 body {
   background: #ffffff;
+  overflow: hidden;
   font-style: 20px;
   color: #333333;
 }
@@ -29,9 +30,17 @@ body > div:first-child,
   text-align: center;
 }
 
+@keyframes spin {
+  from { transform:rotate(0deg) }
+  to { transform:rotate(360deg) }
+}
+
 .logoHP {
-  height: 120px;
+  height: 130px;
+  min-height: 130px;
   margin-bottom: 12px;
+  margin-top: 0px;
+  transition: margin 1000ms cubic-bezier(.17,.84,.44,1);
 }
 
 .title {
@@ -45,7 +54,7 @@ body > div:first-child,
   margin-bottom: 40px;
 }
 
-.button {
+.btn {
 
 }
 
@@ -70,4 +79,12 @@ body > div:first-child,
   min-width: 100%;
   width: 280px;
   margin-bottom: 24px;
+}
+
+.title, .description, .inputUsername, .btn {
+  transition: opacity 460ms ease;
+  
+  &.hide {
+    opacity: 0;
+  }
 }
