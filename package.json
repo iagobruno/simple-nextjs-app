@@ -1,13 +1,10 @@
 {
-  "name": "react-and-next-equal-amazing",
-  "version": "0.0.0",
-  "description": "Um simples projeto para testar o framework NextJS",
   "repository": "https://github.com/httpiago/sample-react-ssr",
   "scripts": {
     "dev": "next",
     "build": "next build",
     "start": "next start",
-    "export": "next export -o dist"
+    "generate-static": "yarn run build && next export"
   },
   "dependencies": {
     "@zeit/next-css": "^0.2.0",
@@ -22,5 +19,6 @@
   },
   "devDependencies": {
     "babel-plugin-module-resolver": "^3.1.1"
-  }
+  }, 
+  "license": "MIT"
 }
