@@ -1,7 +1,8 @@
-import React, { Component } from 'react'
+import React, { Component, Fragment } from 'react'
 import Link from 'next/link'
 import 'isomorphic-fetch'
 
+import Page from '../components/Page'
 import ListRepos from '../components/ListRepos'
 import ErrorOnRequestRepos from '../components/ErrorOnRequestRepos'
 
@@ -34,23 +35,23 @@ class About extends Component {
   render() {
     let { solicitedUsername, requestError, reposList } = this.state
 
-    // A página ainda não foi iniciada (componentDidMount)
+    // A página ainda não foi iniciada (componentDidMount)getQueryString
     if (!solicitedUsername) return <Page>Carregando...</Page>
 
     return (requestError)
       ? (
-        <div className="page">
+        <Page>
           <ErrorOnRequestRepos solicitedUsername={solicitedUsername} />
 
           <Link href="/"><a>TENTAR MAIS UMA VEZ</a></Link>
-        </div>
+        </Page>
       )
       : (
-        <div className="page">
+        <Page>
           <Link href="/"><a className="go-back">{'<'} VOLTAR</a></Link>
 
           <ListRepos reposList={reposList} />
-        </div>
+        </Page>
       )
   }
 }

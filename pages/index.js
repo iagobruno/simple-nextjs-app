@@ -4,6 +4,8 @@ import Router from 'next/router'
 import { Button, Form, Input } from 'reactstrap'
 import { Persist } from 'react-persist'
 
+import Page from '../components/Page'
+
 class Home extends Component {
   state = {
     githubUsername: 'httpiago'
@@ -21,7 +23,7 @@ class Home extends Component {
 
   render() { 
     return (
-      <div className="page">        
+      <Page>
         <img className="logoHP" src="/static/logo.svg" />
         <h1 className="title">Hello world!</h1>
         <div className="description">
@@ -40,7 +42,7 @@ class Home extends Component {
           <Input type="text" className="inputUsername" placeholder={`Username do GitHub (${this.state.githubUsername})`} onChange={this.handleInputChange} />
           <Button color="primary" onClick={this.showRepositories}>Listar repositórios</Button>
         </Form>
-      </div>
+      </Page>
     )
   }
 }
