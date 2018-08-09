@@ -1,63 +1,48 @@
 import React, { Component } from 'react'
 import Link from 'next/link'
-import { Badge, Alert, ListGroup, ListGroupItem } from 'reactstrap'
-import 'isomorphic-fetch' 
+import 'isomorphic-fetch'
+
+import ListRepos from '../components/ListRepos'
+import ErrorOnRequestRepos from '../components/ErrorOnRequestRepos'
 
 class About extends Component {  
-  state = {
-    UserNotFound: false,
-    ErrorOnGetRepos: false
-  }
-  
   static async getInitialProps(urlDetails) {
-    let requestError, username = urlDetails.query.username;
+    
+    let solicitedUsername = urlDetails.query.username
     
     // Solicitar os repositórios
-    let reposList = await fetch(`https://api.github.com/users/${username}/repos`)
-      .then(r => r.json())
-
-    if ('message' in reposList && reposList.message === 'Not Found')
-      requestError = true
-    else
-      // Não mostrar forks
-      reposList = reposList.filter(item => item.fork === false)
-
-    return { reposList, solicitedUsername: username, requestError }
+    let reposList = await fetch(`https://api.github.com/users/${solicitedUsername}/repos`)
+      .then(async (r) => {
+        // Não mostrar forks
+        let rs = await r.json()
+        return rs.filter(item => item.fork === false)
+      })
+      .catch(err => {
+        // Request error
+        return { requestError: true }
+      });
+    
+    return { solicitedUsername, reposList };
   }
 
-  render() { 
-    var content = (this.props.requestError)
+  render() {
+    let { solicitedUsername, requestError, reposList } = this.props
+
+    return (requestError)
       ? (
-        <div class="page">
-          <Alert color="danger" style={{textAlign: 'left'}}>
-            <b>
-              Erro ao Solicitar os repositórios do usuário: <br/>
-              @{this.props.solicitedUsername}{' '}
-            </b>
-            <br/><br/>
-            Usuário não exite!
-          </Alert>
+        <div className="page">
+          <ErrorOnRequestRepos solicitedUsername={solicitedUsername} />
+
           <Link href="/"><a>TENTAR MAIS UMA VEZ</a></Link>
         </div>
       )
       : (
-        <div class="page">
-          <Link href="/"><a class="go-back">{'<'} VOLTAR</a></Link>
+        <div className="page">
+          <Link href="/"><a className="go-back">{'<'} VOLTAR</a></Link>
 
-          <h2 class="repos-title">Lista de repositórios: <Badge color="secondary">{this.props.reposList.length}</Badge></h2>
-          <ListGroup className="list">
-            {this.props.reposList.map((repo) => (
-              <ListGroupItem key={repo.id}>
-                <Link href={repo.url}>
-                  <a>{repo.name}</a>
-                </Link>
-              </ListGroupItem>
-            ))}
-          </ListGroup>
+          <ListRepos reposList={reposList} />
         </div>
       )
-    
-    return content
   }
 }
  
