@@ -33,12 +33,12 @@ class About extends Component {
   }
 
   render() {
-    let { solicitedUsername, requestError, reposList } = this.state
+    let { solicitedUsername, reposList } = this.state
 
     // A página ainda não foi iniciada (componentDidMount)getQueryString
     if (!solicitedUsername) return <Page>Carregando...</Page>
 
-    return (requestError)
+    return (reposList.requestError === true)
       ? (
         <Page>
           <ErrorOnRequestRepos solicitedUsername={solicitedUsername} />

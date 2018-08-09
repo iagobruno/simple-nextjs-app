@@ -30,17 +30,10 @@ body > div:first-child,
   text-align: center;
 }
 
-@keyframes spin {
-  from { transform:rotate(0deg) }
-  to { transform:rotate(360deg) }
-}
-
 .logoHP {
   height: 130px;
   min-height: 130px;
   margin-bottom: 12px;
-  margin-top: 0px;
-  transition: margin 1000ms cubic-bezier(.17,.84,.44,1);
 }
 
 .title {
@@ -55,7 +48,7 @@ body > div:first-child,
 }
 
 .btn {
-
+  margin-top: 24px;
 }
 
 .repos-title {
@@ -78,13 +71,4 @@ body > div:first-child,
   border-radius: 4px;
   min-width: 100%;
   width: 280px;
-  margin-bottom: 24px;
-}
-
-.title, .description, .inputUsername, .btn {
-  transition: opacity 460ms ease;
-  
-  &.hide {
-    opacity: 0;
-  }
 }
