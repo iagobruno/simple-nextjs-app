@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import Link from 'next/link'
-import Router from 'next/router'
 
 import Page from '../components/Page'
 import UsernameForm from '../components/UsernameForm'
@@ -22,8 +21,5 @@ class Home extends Component {
     )
   }
 }
-
-// Avisar no console quando o url da página mudar
-Router.onRouteChangeComplete = (url) => console.log(`Url changed: ${url}`);
 
 export default Home

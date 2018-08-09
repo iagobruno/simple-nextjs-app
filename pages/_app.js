@@ -1,6 +1,7 @@
 // Use this file to create persisting layout between page changes
 import React from 'react'
 import App, {Container} from 'next/app'
+import Router from 'next/router'
 
 import './style.less'
 
@@ -13,6 +14,12 @@ class MyApp extends App {
     }
 
     return {pageProps}
+  }
+  componentDidMount() {
+    // Avisar no console quando o url da página mudar
+    Router.onRouteChangeComplete = (url) => {
+      console.log(`Url changed: ${url}`)
+    };
   }
 
   render () {
