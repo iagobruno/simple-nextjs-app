@@ -5,10 +5,16 @@ import 'isomorphic-fetch'
 import ListRepos from '../components/ListRepos'
 import ErrorOnRequestRepos from '../components/ErrorOnRequestRepos'
 
-class About extends Component {  
-  static async getInitialProps(urlDetails) {
+function getQueryString(a,b){b||(b=window.location.href);a=a.replace(/[\[\]]/g,"\\$&");var c=(new RegExp("[?&]"+a+"(=([^&#]*)|&|#|$)")).exec(b);return c?c[2]?decodeURIComponent(c[2].replace(/\+/g," ")):"":null};
+
+class About extends Component { 
+  state = {
+    solicitedUsername: ''
+  } 
+
+  async componentDidMount() {
     
-    let solicitedUsername = urlDetails.query.username
+    let solicitedUsername = getQueryString('username')
     
     // Solicitar os repositórios
     let reposList = await fetch(`https://api.github.com/users/${solicitedUsername}/repos`)
@@ -22,11 +28,14 @@ class About extends Component {
         return { requestError: true }
       });
     
-    return { solicitedUsername, reposList };
+    this.setState({ solicitedUsername, reposList })
   }
 
   render() {
-    let { solicitedUsername, requestError, reposList } = this.props
+    let { solicitedUsername, requestError, reposList } = this.state
+
+    // A página ainda não foi iniciada (componentDidMount)
+    if (!solicitedUsername) return <Page>Carregando...</Page>
 
     return (requestError)
       ? (
