@@ -15,10 +15,11 @@
     "next-images": "^0.10.5",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-persist": "^1.0.2",
     "reactstrap": "^6.2.0"
   },
   "devDependencies": {
     "babel-plugin-module-resolver": "^3.1.1"
-  }, 
+  },
   "license": "MIT"
 }

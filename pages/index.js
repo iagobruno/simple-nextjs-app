@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Link from 'next/link'
 import Router from 'next/router'
 import { Button, Form, Input } from 'reactstrap'
+import { Persist } from 'react-persist'
 
 class Home extends Component {
   state = {
@@ -13,6 +14,9 @@ class Home extends Component {
 
     // Ir para a página que mostra os repositórios
     Router.push(`/about?username=${this.state.githubUsername}`)
+  }
+  handleInputChange = (event) => {
+    this.setState({ githubUsername: event.target.value })
   }
 
   render() { 
@@ -26,7 +30,14 @@ class Home extends Component {
           (sem contar com os forks).
         </div>
         <Form onSubmit={this.showRepositories}>
-          <Input type="text" className="inputUsername" placeholder={`Username do GitHub (${this.state.githubUsername})`} onChange={(event) => this.setState({ githubUsername: event.target.value})} />
+          {/* Salvar o valor do formulário no navegador */}
+          <Persist 
+            name="username-form" 
+            data={this.state} 
+            debounce={300} 
+            onMount={(data) => this.setState(data)}
+          />
+          <Input type="text" className="inputUsername" placeholder={`Username do GitHub (${this.state.githubUsername})`} onChange={this.handleInputChange} />
           <Button color="primary" onClick={this.showRepositories}>Listar repositórios</Button>
         </Form>
       </div>
