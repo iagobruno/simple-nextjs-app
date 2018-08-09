@@ -1,5 +1,5 @@
 # Sample ReactJS + NextJS app
-[![Live demo](https://img.shields.io/website/https/shields.io.svg?label=Demonstra%C3%A7%C3%A3o)](https://sample-react-and-nextjs.netlify.com/)
+[![Live demo](https://img.shields.io/website/https/shields.io.svg?label=Demonstra%C3%A7%C3%A3o)](https://sample-react-and-next-app.netlify.com/)
 
 ## Instalar
 - Clone esse projeto em seu computador
