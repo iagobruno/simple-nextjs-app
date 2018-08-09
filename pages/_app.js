@@ -2,6 +2,8 @@
 import React from 'react'
 import App, {Container} from 'next/app'
 
+import './style.less'
+
 class MyApp extends App {
   static async getInitialProps ({ Component, router, ctx }) {
     let pageProps = {}

@@ -1,8 +1,6 @@
 // Use this file to create a custom html page
 import Document, { Head, Main, NextScript } from 'next/document'
 
-import './style.less'
-
 class MyDocument extends Document {
   render() {
     return (
