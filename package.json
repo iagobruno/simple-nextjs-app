@@ -16,7 +16,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-persist": "^1.0.2",
-    "reactstrap": "^6.2.0"
+    "react-validation": "^3.0.7"
   },
   "devDependencies": {
     "babel-plugin-module-resolver": "^3.1.1"

@@ -1,21 +1,20 @@
 import React, { Fragment } from 'react'
 import Link from 'next/link'
-import { Badge, ListGroup, ListGroupItem } from 'reactstrap'
 
 export default (props) => {
   return (
     <Fragment>
-      <h2 className="repos-title">Lista de repositórios: <Badge color="secondary">{props.reposList.length}</Badge></h2>
+      <h2 className="repos-title">Lista de repositórios: <span className="badge badge-secondary">{props.reposList.length}</span></h2>
       
-      <ListGroup className="list">
+      <ul className="list list-group">
         {props.reposList.map((repo) => (
-          <ListGroupItem key={repo.id}>
+          <li className="list-group-item" key={repo.id}>
             <Link href={repo.url}>
-                <a>{repo.name}</a>
-              </Link>
-          </ListGroupItem>
+              <a>{repo.name}</a>
+            </Link>
+          </li>
         ))}
-      </ListGroup>
+      </ul>
     </Fragment>
   )
 }
