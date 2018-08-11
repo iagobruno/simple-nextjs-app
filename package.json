@@ -17,7 +17,6 @@
     "react-dom": "^16.4.1",
     "react-persist": "^1.0.2",
     "react-validation": "^3.0.7",
-    "react-validation": "^3.0.7"
     "unstated": "^2.1.1"
   },
   "devDependencies": {
