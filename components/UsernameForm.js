@@ -3,7 +3,7 @@ import Router from 'next/router'
 import Form from 'react-validation/build/form'
 import Input from 'react-validation/build/input'
 import Button from 'react-validation/build/button'
-import { Persist } from 'react-persist'
+import { connect } from '../store'
 
 const InvalidMsg = (props) => <div className="invalid-feedback" style={{display:'block'}}>{props.children}</div>
 const ValidMsg = (props) => <div className="valid-feedback" style={{display:'block'}}>{props.children}</div>
@@ -19,11 +19,6 @@ class UsernameForm extends Component {
   constructor(props) {
     super(props)
 
-    // Default state
-    this.state = {
-      githubUsername: ''
-    }
-
     this.mainform = React.createRef()
     this.usernameInput = React.createRef()
   }
@@ -32,29 +27,25 @@ class UsernameForm extends Component {
     event.preventDefault()
     
     // Ir para a página que mostra os repositórios
-    console.log('Buscando os repositórios do usuário:', this.state.githubUsername);
-    Router.push(`/about?username=${this.state.githubUsername}`)
+    console.log('Buscando os repositórios do usuário:', this.store.state.githubUsername);
+    Router.push(`/about?username=${this.store.state.githubUsername}`)
   }
   handleInputChange = (event) => {
-    this.setState({ githubUsername: event.target.value })
+    this.store.changeUsername(event.target.value)
   }
 
-  render() { 
+  render() {
+    this.store = this.props.store
+
     return (
       <Form className="username-form" ref={this.mainform} onSubmit={this.showRepositories}>
         {/* Salvar o username no localStorage */}
-        <Persist 
-          name="username-form" 
-          data={this.state} 
-          debounce={300} 
-          onMount={(data) => this.setState(data)}
-        />
         <Input
           type="text" 
           name="username" 
           className="form-control inputUsername" 
           ref={this.usernameInput} 
-          value={this.state.githubUsername}
+          value={this.store.state.githubUsername}
           placeholder="Username do GitHub" 
           onChange={this.handleInputChange}
           validations={[required]} 
@@ -64,5 +55,6 @@ class UsernameForm extends Component {
     )
   }
 }
- 
-export default UsernameForm;
+
+
+export default connect(UsernameForm)

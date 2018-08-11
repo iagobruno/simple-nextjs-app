@@ -2,6 +2,7 @@
 import React from 'react'
 import App, {Container} from 'next/app'
 import Router from 'next/router'
+import { Provider } from 'unstated'
 
 import './style.less'
 
@@ -24,9 +25,13 @@ class MyApp extends App {
 
   render () {
     const {Component, pageProps} = this.props
-    return <Container>
-      <Component {...pageProps} />
-    </Container>
+    return (
+      <Container>
+        <Provider>
+          <Component {...pageProps} />
+        </Provider>
+      </Container>
+    )
   }
 }
 
