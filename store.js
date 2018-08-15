@@ -1,26 +1,57 @@
-import { Container, Subscribe } from 'unstated'
+import { Container, Subscribe, Provider } from 'unstated'
 
-export class Store extends Container {
+class Store extends Container {
+  // Default state
   state = {
     githubUsername: 'google'
   } 
 
+  setInitialState = (newState) => {
+    // Essa função serve para o componente App mudar o estado global com um estado previamente salvo no navegador.
+    // Ela só pode ser chamada uma vez, logo após o app ser montado
+    this.setState(newState, () => this.setInitialState = () => {})
+  }
+
   changeUsername = (newValue) => {
-    this.setState(prevState => {
-      return { githubUsername: newValue }
-    }, function() {
-      console.log('novo estado')
-    })
+    this.setState(prevState => ({
+      githubUsername: newValue
+    }))
   }
 }
 
+/**
+ * 
+ * @export - Global State Class
+ */
+export const StoreClass = new Store()
+
+/**
+ * Fazer os componentes filhos atualizarem em qualquer atualização no stado global e além disso
+ * passar o estado global junto com as actions em prop.store.
+ * 
+ * @return - React Component
+ * @example
+ *   import { connect } from '../store'
+ *   class Home extends Component {
+ *     render() {
+ *       return this.props.store.state.user
+ *     }
+ *   }
+ *   export default connect(Home)
+ */
 export const connect = (Component) => props => (
-  // Fazer o component atualizar quando um desses container de estado for atualizado.
-  // Você pode acessar os dados chamando this.props.store
-  // OBSERVAÇÃO: Não recomendado fazer isso nos componentes do tipo página do NextJS, por que se não ele não vai conseguir chamar o "getInitialProps".
-  <Subscribe to={[Store]}>
+  <Subscribe to={[StoreClass]}>
     {(store) => (
       <Component store={store} {...props}>{props.children}</Component>
     )}
   </Subscribe>
+)
+
+/**
+ * Só é usado em App.js
+ * 
+ * @return - React Component
+ */
+export const GlobalStore = (props) => (
+  <Provider inject={[StoreClass]}>{props.children}</Provider>
 )
