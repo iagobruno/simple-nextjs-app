@@ -13,6 +13,7 @@
     "less": "^3.0.4",
     "next": "^6.1.0",
     "next-images": "^0.10.5",
+    "prop-types": "^15.6.2",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-persist": "^1.0.2",

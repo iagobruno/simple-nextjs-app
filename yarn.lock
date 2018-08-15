@@ -3907,7 +3907,7 @@ prop-types@15.6.0:
     loose-envify "^1.3.1"
     object-assign "^4.1.1"
 
-prop-types@^15.6.0:
+prop-types@^15.6.0, prop-types@^15.6.2:
   version "15.6.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
   dependencies:
@@ -4045,10 +4045,6 @@ react-validation@^3.0.7:
     react "^16.0.0"
     shallow-equal "^1.0.0"
     uuid "^3.1.0"
-
-react-waterfall@^4.0.0-beta.4:
-  version "4.0.0-beta.4"
-  resolved "https://registry.yarnpkg.com/react-waterfall/-/react-waterfall-4.0.0-beta.4.tgz#8c0157fd5f73111f4519669c45e9b45b93a90638"
 
 react@^16.0.0:
   version "16.4.2"

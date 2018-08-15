@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react'
+import PropTypes from 'prop-types'
 import Link from 'next/link'
 
-export default (props) => {
+const ListRepos = (props) => {
   return (
     <Fragment>
       <h2 className="repos-title">Lista de repositórios: <span className="badge badge-secondary">{props.reposList.length}</span></h2>
@@ -18,3 +19,9 @@ export default (props) => {
     </Fragment>
   )
 }
+
+ListRepos.propTypes = {
+  reposList: PropTypes.array.isRequired
+}
+
+export default ListRepos

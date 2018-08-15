@@ -1,6 +1,7 @@
 import React, { Fragment } from 'react'
+import PropTypes from 'prop-types'
 
-export default (props) => {
+const ErrorAlert = (props) => {
   return (
     <div className="alert alert-danger" style={{textAlign: 'left'}} role="alert">
       <b>
@@ -13,3 +14,9 @@ export default (props) => {
     </div>
   )
 }
+
+ErrorAlert.propTypes = {
+  solicitedUsername: PropTypes.string.isRequired
+}
+
+export default ErrorAlert
