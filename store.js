@@ -14,11 +14,13 @@ export class Store extends Container {
   }
 }
 
-export const connect = (Component) => _ => (
+export const connect = (Component) => props => (
   // Fazer o component atualizar quando um desses container de estado for atualizado.
   // Você pode acessar os dados chamando this.props.store
   // OBSERVAÇÃO: Não recomendado fazer isso nos componentes do tipo página do NextJS, por que se não ele não vai conseguir chamar o "getInitialProps".
   <Subscribe to={[Store]}>
-    {(store) => <Component store={store} />}
+    {(store) => (
+      <Component store={store} {...props}>{props.children}</Component>
+    )}
   </Subscribe>
 )
