@@ -4,7 +4,8 @@ import App, {Container} from 'next/app'
 import Router from 'next/router'
 import { GlobalStore, connect } from '../store'
 import { Persist } from 'react-persist'
-import { Provider } from 'unstated'
+// Import babel polyfills for old browsers
+import 'babel-polyfill'
 
 import './style.less'
 
