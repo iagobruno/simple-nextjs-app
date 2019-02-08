@@ -1,4 +1,5 @@
-import React, { Component, Fragment } from 'react'
+import React from 'react'
+import Head from 'next/head'
 import Link from 'next/link'
 import 'isomorphic-fetch'
 
@@ -6,54 +7,60 @@ import Page from '../components/Page'
 import ListRepos from '../components/ListRepos'
 import ErrorOnRequestRepos from '../components/ErrorOnRequestRepos'
 
-function getQueryString(a,b){b||(b=window.location.href);a=a.replace(/[\[\]]/g,"\\$&");var c=(new RegExp("[?&]"+a+"(=([^&#]*)|&|#|$)")).exec(b);return c?c[2]?decodeURIComponent(c[2].replace(/\+/g," ")):"":null};
+export default function AboutPage(props) { 
+  const { solicitedUsername, reposList } = props
 
-class About extends Component { 
-  state = {
-    solicitedUsername: ''
-  } 
+  if (reposList.Error) {
+    // Mostrar mensagem de erro na tela
+    return (
+      <Page>
+        <Head>
+          <title>Erro ao solicitar repositórios de @{solicitedUsername}</title>
+        </Head>
 
-  async componentDidMount() {
-    
-    let solicitedUsername = getQueryString('username')
-    
-    // Solicitar os repositórios
-    let reposList = await fetch(`https://api.github.com/users/${solicitedUsername}/repos`)
-      .then(async (r) => {
-        // Não mostrar forks
-        let rs = await r.json()
-        return rs.filter(item => item.fork === false)
-      })
-      .catch(err => {
-        // Request error
-        return { requestError: true }
-      });
-    
-    this.setState({ solicitedUsername, reposList })
+        <ErrorOnRequestRepos
+          solicitedUsername={props.solicitedUsername}
+        />
+
+        <Link href="/"><a>TENTAR MAIS UMA VEZ</a></Link>
+      </Page>
+    )
   }
 
-  render() {
-    let { solicitedUsername, reposList } = this.state
+  // Mostrar lista de repositórios
+  return (
+    <Page>
+      <Head>
+        <title>Mostrando repositórios de @{solicitedUsername}</title>
+      </Head>
 
-    // A página ainda não foi iniciada (componentDidMount)getQueryString
-    if (!solicitedUsername) return <Page>Carregando...</Page>
-
-    return (reposList.requestError === true)
-      ? (
-        <Page>
-          <ErrorOnRequestRepos solicitedUsername={solicitedUsername} />
-
-          <Link href="/"><a>TENTAR MAIS UMA VEZ</a></Link>
-        </Page>
-      )
-      : (
-        <Page>
-          <Link href="/"><a className="go-back">{'<'} VOLTAR</a></Link>
-
-          <ListRepos reposList={reposList} />
-        </Page>
-      )
-  }
+      <ListRepos
+        reposList={reposList}
+        solicitedUsername={props.solicitedUsername}
+      />
+    </Page>
+  )
 }
- 
-export default About;
+
+/**
+ * Server code
+ * @see https://github.com/zeit/next.js/#fetching-data-and-component-lifecycle
+ */
+AboutPage.getInitialProps = async ({ query }) => {
+  const solicitedUsername = query.username || 'httpiago'
+  
+  // Solicitar os repositórios do usuário definido
+  const reposList = await fetch(`https://api.github.com/users/${solicitedUsername}/repos`)
+    .then(async res => {
+      let list = await res.json()
+      // Não mostrar forks
+      return list.filter(item => item.fork === false);
+    })
+    .catch(error => {
+      // Request error
+      //console.error('Erro ao solicitar repositórios:', error)
+      // Mostrar menssagem de erro na tela
+      return { Error: true };
+    })
+return { solicitedUsername, reposList }
+}

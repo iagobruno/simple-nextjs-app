@@ -6,7 +6,7 @@ module.exports = withImages(withCSS(withLess({
   exportPathMap: async function (defaultPathMap) {
     return {
       '/': { page: '/index' },
-      '/about': { page: '/about', query: { username: 'httpiago' } }
+      '/about': { page: '/about' }
     }
   }
 })))

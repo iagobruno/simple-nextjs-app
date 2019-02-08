@@ -2,23 +2,12 @@
 import React from 'react'
 import App, {Container} from 'next/app'
 import Router from 'next/router'
-import { GlobalStore, connect } from '../store'
-import { Persist } from 'react-persist'
 // Import babel polyfills for old browsers
 import 'babel-polyfill'
 
 import './style.less'
 
-const GlobalStorePersist = connect((props) => (
-  <Persist 
-    name="global-state" 
-    data={props.store.state} 
-    debounce={500} 
-    onMount={data => props.store.setInitialState(data)}
-  />
-))
-
-class MyApp extends App {
+export default class MyApp extends App {
   static async getInitialProps ({ Component, router, ctx }) {
     let pageProps = {}
 
@@ -37,15 +26,11 @@ class MyApp extends App {
 
   render () {
     const {Component, pageProps} = this.props
+
     return (
       <Container>
-        <GlobalStore>
-          <GlobalStorePersist />
-          <Component {...pageProps} />
-        </GlobalStore>
+        <Component {...pageProps} />
       </Container>
     )
   }
 }
-
-export default MyApp

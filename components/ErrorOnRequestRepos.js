@@ -1,9 +1,13 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 
-const ErrorAlert = (props) => {
+export default function ErrorAlert(props) {
   return (
-    <div className="alert alert-danger" style={{textAlign: 'left'}} role="alert">
+    <div
+      className="alert alert-danger"
+      style={{textAlign: 'left'}}
+      role="alert"
+    >
       <b>
         Erro ao Solicitar os repositórios do usuário: <br/>
         @{props.solicitedUsername}{' '}
@@ -18,5 +22,3 @@ const ErrorAlert = (props) => {
 ErrorAlert.propTypes = {
   solicitedUsername: PropTypes.string.isRequired
 }
-
-export default ErrorAlert

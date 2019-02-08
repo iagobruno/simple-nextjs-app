@@ -36,6 +36,11 @@ body > div:first-child,
   height: 130px;
   min-height: 130px;
   margin-bottom: 12px;
+  
+  &.looping {
+    -webkit-animation: infinite-spinning 1.4s linear infinite;
+    animation: infinite-spinning 1.4s linear infinite;
+  }
 }
 
 .title {
@@ -74,4 +79,14 @@ body > div:first-child,
   border-radius: 4px;
   min-width: 100%;
   width: 280px;
+}
+
+@-webkit-keyframes infinite-spinning {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes infinite-spinning {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
 }

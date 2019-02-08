@@ -1,7 +1,9 @@
 import React from 'react';
 
-export default (props) => {
+export default function Page(props) {
   return (
-    <div className="page">{props.children}</div>
+    <div className="page">
+      {props.children}
+    </div>
   )
 }
