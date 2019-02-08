@@ -6,7 +6,7 @@
 
 body {
   background: #ffffff;
-  overflow: hidden;
+  overflow-y: scroll;
   font-style: 20px;
   color: #333333;
 }
@@ -15,8 +15,10 @@ html,
 body,
 body > div:first-child,
 .page {
-  height: 100%;
+  min-height: 100%;
   width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .page {
@@ -52,6 +54,7 @@ body > div:first-child,
 }
 
 .repos-title {
+  align-self: flex-start;
   text-align: left;
   margin-top: 6px;
 }
